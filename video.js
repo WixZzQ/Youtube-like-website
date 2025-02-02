@@ -78,17 +78,24 @@ const displayVideos = (videos) => {
        const card = document.createElement("div")
        card.classList = "card card-compact shadow-xl"
        card.innerHTML = `
-       <figure>
+       <figure class="h-[200px]">
     <img
       src="${video.thumbnail}"
+      class="h-full w-full object-cover"
       alt="" />
   </figure>
-  <div class="card-body">
-    <h2 class="card-title">${video.title}</h2>
-    <p>${video.description}</p>
-    <div class="card-actions justify-end">
-      <button class="btn btn-primary">Buy Now</button>
-    </div>
+  <div class="px-0 py-4 flex gap-2">
+  <div class>
+        <img src="${video.authors[0].profile_picture}" alt="" class="rounded-full h-8 w-8 mr-2 object-cover">
+        
+  </div>
+  <div>
+  <h2 class="font-bold">${video.title}</h2>
+  <div class="flex items-center text-sm text-gray-600 gap-2">
+  <p class="text-gray-400">${video.authors[0].profile_name}</p>
+    <img class="w-5" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAcxJREFUSEvt1EuoTWEYxvHfkduEYiLlxNBElEuUcsnASEmYKYWJEnKZSMyElOiUAaWUiUtJJkRKLhOZyICJgSTCxICI761XrZa1zz5n7bIn+5utdz3f+3zf/33WGtKnNdQnXwPj/0Z+gHqAuhuByMhxnMPHDuIZ2J+6n381vYbrFA7gPVbhdc18Ku5jBZ5gDb6HphfjPTibRk/T+EfFeAKuYWPWTuJwrzeOZtfz4G+wDF9qt72AXVm7iU343Yvx8oLsISbjE5bgbc008McYYjXRGDfq+XhcEEdgAmvM7nnNdCuudqHRaHwUgelDreEsPMPcrAe6GzXNatzFRHzFUsQo/ln1cO3DmUS4pQTmQe6Yjkdlrgvy+SBO17oFjThYaINGpDwwN6668aUyr+0VZSTxGG4V43VZHynf7O6KZi1epelw1jdnojv5NqLeifMZntj4GTOzw50y0w34lc/bcDkTHXOPdagSrHEZh3gR4hOYV9n5AivxLWuTMs2zK5qL2NHRrfJitB/INFzJG77D4obAzSmf0+1yyIXlUPfKTNdXaIzqP5Y/195M6ssOnabgCE5UaHS99FiMuzZpIxgYt6HWas8AdStsbTb1DfUf7jVNH16udM0AAAAASUVORK5CYII="/>
+  </div>
+  </div>
   </div>
   `
   videoContainer.append(card)
