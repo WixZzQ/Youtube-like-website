@@ -40,7 +40,11 @@ const loadCategoryVideos = (id) => {
     //   alert(id)
       fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
       .then(res => res.json())
-      .then(data => displayVideos(data.category))
+      .then(data => {
+        displayVideos(data.category)
+        const activeBtn = document.getElementById(`btn-${id}`)
+        activeBtn.classList.add('active')
+      })
       .catch(err =>{
           console.log(err)
       })
@@ -86,7 +90,7 @@ const displayCategories = (categories) =>{
         // create a button
         const buttonContainer = document.createElement("div");
        buttonContainer.innerHTML = `
-        <button onclick="loadCategoryVideos(${item.category_id})" class="btn">
+        <button id="btn-${item.category_id}" onclick="loadCategoryVideos(${item.category_id})" class="btn">
         ${item.category}
         </button>
         <button></button>
@@ -101,6 +105,24 @@ const displayCategories = (categories) =>{
 const displayVideos = (videos) => {
     const videoContainer = document.getElementById("videos")
     videoContainer.innerHTML = ""
+
+    if(videos.length === 0) {
+        videoContainer.classList.remove("grid")
+        videoContainer.innerHTML = `
+        <div class="min-h-[300px] flex flex-col justify-center gap-5">
+        <img class="w-20 ml-[41.4rem]" src="images/Icon.png"><h2 class="text-center text-3xl font-bold text-gray-600 mt-2">
+        No Videos currently available here yet on this category.<br>
+        Sorry, :(
+        </h2>
+        </div>
+        
+        `
+        return;
+    }
+    else{
+        videoContainer.classList.add("grid")
+        videoContainer.classList.add("grid-cols-2")
+    }
 
     // add data in html
     videos.forEach((video) => {
